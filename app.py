@@ -39,7 +39,6 @@ def dashboard():
 @app.post("/webhook")
 def webhook():
     data = request.data
-
     if data:
         r.publish('tradingview', data)
 
@@ -54,11 +53,14 @@ def webhook():
                 data_dict['strategy']['order_action'], 
                 data_dict['strategy']['order_contracts'],
                 data_dict['strategy']['order_price']))
-
         db.commit()
-
         return data
 
     return {
         "code": "success"
     }
+
+
+if __name__ == "__main__":
+	app.run()
+    
